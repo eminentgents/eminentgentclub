@@ -5,25 +5,51 @@ import { X, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react"
 import Navigation from "@/components/navigation"
 import { useRouter } from "next/navigation"
 
+interface GalleryImage {
+  id: number
+  src: string
+}
+
 export default function FullGalleryPage() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
+  const [allGalleryImages, setAllGalleryImages] = useState<GalleryImage[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const router = useRouter()
 
-  const allGalleryImages = [
-    { id: 1, title: "Members Gathering 2024", description: "Annual gathering", src: "/a.jpg" },
-    { id: 2, title: "Leadership Summit", description: "Executive council meeting", src: "/b.jpg" },
-    { id: 3, title: "Community Outreach", description: "Community engagement", src: "/c.jpg" },
-    { id: 4, title: "Inaugural Event", description: "EGIC inaugural ceremony 2020", src: "/d.jpg" },
-    { id: 5, title: "Networking Event", description: "Members collaboration", src: "/e.jpg" },
-    { id: 6, title: "Annual Conference", description: "EGIC annual conference 2023", src: "/f.jpg" },
-    { id: 7, title: "Inaugural Event", description: "EGIC inaugural ceremony 2020", src: "/g.jpg" },
-    { id: 8, title: "Networking Event", description: "Members collaboration", src: "/h.jpg" },
-    { id: 9, title: "Annual Conference", description: "EGIC annual conference 2023", src: "/i.jpg" },
-    // Add more images here for the full gallery page
-    { id: 10, title: "Additional Event 1", description: "More events", src: "/j.jpg" },
-    { id: 11, title: "Additional Event 2", description: "More events", src: "/k.jpg" },
-    { id: 12, title: "Additional Event 3", description: "More events", src: "/l.jpg" },
-  ]
+  // Fetch images from API
+  useEffect(() => {
+    const fetchGalleryImages = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch('/api/gallery')
+        const data = await response.json()
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch gallery images')
+        }
+
+        if (data.images && data.images.length > 0) {
+          // Simple transformation - just IDs and src
+          const formattedImages: GalleryImage[] = data.images.map((src: string, index: number) => ({
+            id: index + 1,
+            src: src
+          }))
+          
+          setAllGalleryImages(formattedImages)
+        } else {
+          setAllGalleryImages([])
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred')
+        console.error('Error fetching gallery images:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchGalleryImages()
+  }, [])
 
   const handleNext = () => {
     if (selectedImage !== null) {
@@ -54,7 +80,7 @@ export default function FullGalleryPage() {
 
     if (selectedImage !== null) {
       document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden' // Prevent scrolling when modal is open
+      document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'unset'
     }
@@ -64,6 +90,28 @@ export default function FullGalleryPage() {
       document.body.style.overflow = 'unset'
     }
   }, [selectedImage])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-card">
+        <Navigation />
+        <div className="flex justify-center items-center py-32">
+          <div className="text-lg text-muted-foreground">Loading gallery images...</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-card">
+        <Navigation />
+        <div className="flex justify-center items-center py-32">
+          <div className="text-lg text-red-600">Error: {error}</div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-card">
@@ -82,33 +130,38 @@ export default function FullGalleryPage() {
 
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Full Gallery</h1>
-            <p className="text-md text-muted-foreground">All moments from our events</p>
+            <p className="text-md text-muted-foreground">
+              {allGalleryImages.length} moments from our events
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {allGalleryImages.map((image) => (
-              <div
-                key={image.id}
-                onClick={() => setSelectedImage(image.id)}
-                className="group relative cursor-pointer overflow-hidden rounded-lg aspect-square"
-              >
-                <img
-                  src={image.src}
-                  alt={image.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300 flex flex-col justify-end p-4">
-                  <h3 className="text-white font-semibold text-sm">{image.title}</h3>
-                  <p className="text-white/80 text-xs">{image.description}</p>
+          {allGalleryImages.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-muted-foreground">No images found in the gallery</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {allGalleryImages.map((image) => (
+                <div
+                  key={image.id}
+                  onClick={() => setSelectedImage(image.id)}
+                  className="group relative cursor-pointer overflow-hidden rounded-lg aspect-square"
+                >
+                  <img
+                    src={image.src}
+                    alt={`Gallery image ${image.id}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* Full Screen Lightbox Modal */}
-      {selectedImage !== null && (
+      {selectedImage !== null && allGalleryImages.length > 0 && (
         <div 
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
           onClick={handleBackdropClick}
@@ -141,17 +194,15 @@ export default function FullGalleryPage() {
             <div className="flex-1 flex items-center justify-center overflow-hidden">
               <img
                 src={allGalleryImages[selectedImage - 1].src}
-                alt={allGalleryImages[selectedImage - 1].title}
+                alt={`Gallery image ${selectedImage}`}
                 className="w-full h-full object-contain max-w-full max-h-full"
-                onClick={() => setSelectedImage(null)} // Close when clicking on image
+                onClick={() => setSelectedImage(null)}
               />
             </div>
 
-            {/* Image Info */}
-            <div className="text-center mt-4 p-4 bg-black/50 rounded-lg">
-              <h3 className="text-white text-lg font-bold">{allGalleryImages[selectedImage - 1].title}</h3>
-              <p className="text-white/70 text-sm mt-1">{allGalleryImages[selectedImage - 1].description}</p>
-              <p className="text-white/50 text-xs mt-2">
+            {/* Image Counter */}
+            <div className="text-center mt-4 p-4">
+              <p className="text-white/50 text-sm">
                 {selectedImage} of {allGalleryImages.length}
               </p>
             </div>
