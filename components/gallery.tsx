@@ -8,12 +8,12 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
 
   const galleryImages = [
-    { id: 1, title: "Members Gathering 2024", description: "Annual gathering", src: "/a.jpg" },
-    { id: 2, title: "Leadership Summit", description: "Executive council meeting", src: "/b.jpg" },
-    { id: 3, title: "Community Outreach", description: "Community engagement", src: "/c.jpg" },
-    { id: 4, title: "Inaugural Event", description: "EGIC inaugural ceremony 2020", src: "/d.jpg" },
-    { id: 5, title: "Networking Event", description: "Members collaboration", src: "/e.jpg" },
-    { id: 6, title: "Annual Conference", description: "EGIC annual conference 2023", src: "/f.jpg" },
+    { id: 1, title: "Members Gathering", description: "Annual gathering", src: "/f.jpg" },
+    { id: 2, title: "Visit to our Governor General", description: "EGIC meeting", src: "/a1.jpg" },
+    { id: 3, title: "Community Outreach", description: "Community engagement", src: "/e.jpg" },
+    { id: 4, title: "", description: "", src: "/d.jpg" },
+    { id: 5, title: "", description: "", src: "/c.jpg" },
+    { id: 6, title: "", description: "", src: "/a.jpg" },
   ]
 
   const handleNext = () => {

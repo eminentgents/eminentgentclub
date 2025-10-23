@@ -40,6 +40,14 @@ export default function Testimonials() {
           ))}
         </div>
       </div>
+      {/* Motto Section */}
+        <div className="text-center  mt-8">
+          <p className="text-xl font-bold text-secondary mb-2">"Empowerment & Knowledge"</p>
+          <p className="text-sm text-muted-foreground">
+            Greeting: <span className="font-medium text-foreground">"GREAT EMINENT"</span> • 
+            Response: <span className="font-medium text-foreground">"GREAT"</span>
+          </p>
+        </div>
     </section>
   )
 }

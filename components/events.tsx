@@ -2,10 +2,10 @@ import { Calendar, MapPin } from "lucide-react"
 
 export default function Events() {
   const events = [
-    { title: "Monthly Meeting", date: "First Friday", location: "Ijebu-Ode" },
-    { title: "Quarterly Summit", date: "Every Quarter", location: "Lagos" },
-    { title: "Annual Conference", date: "December", location: "Abuja" },
-    { title: "Community Outreach", date: "Monthly", location: "Various" },
+    { title: "Monthly General Meeting", date: "TBD", location: "Ijebu-Ode" },
+    { title: "Ileya 2026 Outing", date: "2026", location: "Lagos" },
+    { title: "Community Outreach", date: "TBD", location: "various" },
+    { title: "Year 2026 Project", date: "2026", location: "Various" },
   ]
 
   return (

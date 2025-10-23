@@ -1,85 +1,57 @@
 "use client"
 
-import { Users, Lightbulb, MessageSquare, BookOpen, Handshake, Zap } from "lucide-react"
+import { Users, Globe, Target, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function About() {
-  const objectives = [
+  const cards = [
     {
       icon: Users,
-      title: "Platform for Unity",
-      description: "Meet and share ideas for Nigeria's development",
+      title: "Who We Are",
+      content: "Eminent Gents International Club unites Nigerians worldwide to drive development through strategic collaboration and shared vision for progress.",
     },
     {
-      icon: Zap,
-      title: "Foster Cooperation",
-      description: "Build unity and solidarity among citizens",
+      icon: Globe,
+      title: "Our Reach",
+      content: "With members across continents, we leverage global perspectives to create local impact in healthcare, education, and community development initiatives.",
     },
     {
-      icon: Lightbulb,
-      title: "Explore Talents",
-      description: "Promote economic, cultural and social growth",
-    },
-    {
-      icon: MessageSquare,
-      title: "Critical Examination",
-      description: "Examine issues and evolve collective solutions",
-    },
-    {
-      icon: BookOpen,
-      title: "Disseminate Information",
-      description: "Share knowledge through seminars and workshops",
-    },
-    {
-      icon: Handshake,
-      title: "Build Trust",
-      description: "Promote understanding and goodwill among members",
+      icon: Target,
+      title: "Our Mission",
+      content: "To empower communities through philanthropy, foster unity among members, and create sustainable change through targeted social interventions.",
     },
   ]
 
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">About EGIC</h2>
-          <p className="text-sm md:text-base text-muted-foreground">Our Aims & Objectives</p>
+    <section className="py-16 bg-background">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-bold text-foreground mb-3">About EGIC</h1>
+          <p className="text-muted-foreground">Eminent Gents International Club - Excellence Through Unity</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {objectives.slice(0, 3).map((obj, idx) => {
-            const Icon = obj.icon
+        {/* Three Horizontal Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {cards.map((card, idx) => {
+            const Icon = card.icon
             return (
-              <div key={idx} className="card-hover">
+              <div key={idx} className="bg-card border border-border rounded-lg p-6 hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-base font-bold text-foreground mb-2">{obj.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{obj.description}</p>
+                <h3 className="text-lg font-semibold text-foreground mb-3">{card.title}</h3>
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{card.content}</p>
+                <Link 
+                  href="/about"
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium text-sm"
+                >
+                  Read More
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             )
           })}
-          {objectives.slice(3).map((obj, idx) => {
-            const Icon = obj.icon
-            return (
-              <div key={idx + 3} className="card-hover hidden md:block">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-base font-bold text-foreground mb-2">{obj.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{obj.description}</p>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Motto Section */}
-        <div className="bg-card rounded-lg border border-border p-8 md:p-12">
-          <h3 className="text-xl md:text-2xl font-bold text-primary mb-3">Our Motto</h3>
-          <p className="text-lg md:text-xl font-bold text-secondary mb-4">"Empowerment & Knowledge"</p>
-          <p className="text-sm md:text-base text-foreground leading-relaxed">
-            The formal greeting symbol among members is <span className="font-bold text-primary">"GREAT EMINENT"</span>{" "}
-            with thumb up, and every member must reply by saying{" "}
-            <span className="font-bold text-secondary">"GREAT"</span>.
-          </p>
         </div>
       </div>
     </section>
