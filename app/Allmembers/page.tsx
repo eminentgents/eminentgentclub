@@ -7,7 +7,7 @@ import Footer from "@/components/footer"
 
 export default function AllMembers() {
   const members = [
-    { id: 1, name: "Eminent (Otunba) Olumide OWOSENI", position: "President", bio: "Visionary leader dedicated to the growth and development of EGIC", image: "/owoseni.jpg" },
+    { id: 1, name: "Eminent Otunba Olumide Owoseni Fca. Work at Chairman/ CEO Lumie. Group of Companies.", position: "President", bio: "Visionary leader dedicated to the growth and development of EGIC", image: "/owoseni.jpg" },
     { id: 2, name: "Eminent Aare (Engr) Ajibola Fagade", position: "Vice President", bio: "Engineering expert with years of leadership experience", image: "/fagade.jpg" },
     { id: 3, name: "Eminent (Prince) ADEDEJI Babatunde Abiodun", position: "General Secretary", bio: "Academic leader committed to organizational excellence", image: "/abiodun.jpg" },
     { id: 4, name: "Eminent ABDUL Olatunji Segunmaru", position: "Treasurer", image: "/segunmaru.jpg" },
@@ -22,6 +22,12 @@ export default function AllMembers() {
     { id: 13, name: "High Chief, Abiodun Odeyemi. The Baale of ILOGBO OLOFIN. Abeokuta.", position: "Club Governor General",  image: "/Odeyemi.jpg" },
     { id: 14, name: "Chief Mrs Dr Atinuke Abioro. PHD, Chartered Member of the Nigeria Institute of Management (NIOM", position: "Advisor",  image: "/Abioro.jpg" },
     { id: 15, name: "Eminent Mike Olorunwa", position: "Assistant General Secretary",  image: "/Olorunwa.jpg" },
+    { id: 16, name: "Eminent Moshood Adebisi Yusuf. Works at, Chairman, Demolish Venture LTD Importer and Exporter of Household Goods", position: "Member",  image: "/Yusuf.jpg" },
+    { id: 17, name: "Eminent  Ariyo Abass Olalekan. CEO Aribass Global Logistics Freight Forwarder & Maritime", position: "Member",  image: "/Olalekan.jpg" },
+    { id: 18, name: "Eminent Ganiyu Omotayo Lateef. Survey Technician", position: "Member",  image: "/Lateef.jpg" },
+    { id: 19, name: "Eminent Oyesanya Olatunji. Work at MD, Corner Breeks Building Company Nig, Limited.", position: "Member",  image: "/Olatunji.jpg" },
+    { id: 20, name: "Eminent Jayesimi Ademuyiwa. Work at The MD Jayetech Level Plus Limited.", position: "Member",  image: "/Ademuyiwa.jpg" },
+    { id: 21, name: "Eminent Ayenogun Segun. Work at Bureau of Local Government Pensions, Office of the Executive Governor,  Oke-Mosan, Abeokuta, Ogun State", position: "Member",  image: "/Segun.jpg" },
   ]
 
   return (
