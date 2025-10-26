@@ -10,9 +10,18 @@ export default function AllMembers() {
     { id: 1, name: "Eminent (Otunba) Olumide OWOSENI", position: "President", bio: "Visionary leader dedicated to the growth and development of EGIC", image: "/owoseni.jpg" },
     { id: 2, name: "Eminent Aare (Engr) Ajibola Fagade", position: "Vice President", bio: "Engineering expert with years of leadership experience", image: "/fagade.jpg" },
     { id: 3, name: "Eminent (Prince) ADEDEJI Babatunde Abiodun", position: "General Secretary", bio: "Academic leader committed to organizational excellence", image: "/abiodun.jpg" },
-    { id: 4, name: "Eminent ABDUL Olatunji Segunmaru", position: "Treasurer", bio: "Financial expert ensuring fiscal responsibility", image: "/segunmaru.jpg" },
-    { id: 5, name: "Eminent AKINSANYA Olaseni", position: "Financial Secretary", bio: "Financial expert managing club finances", image: "/olaseni.jpg" },
-    { id: 6, name: "Eminent (Barrister) AKODU Abayomi", position: "PRO", bio: "Communications expert handling public relations", image: "/abayomi.jpg" },
+    { id: 4, name: "Eminent ABDUL Olatunji Segunmaru", position: "Treasurer", image: "/segunmaru.jpg" },
+    { id: 5, name: "Eminent AKINSANYA Olaseni", position: "Financial Secretary",  image: "/olaseni.jpg" },
+    { id: 6, name: "Eminent (Barrister) AKODU Abayomi", position: "PRO", image: "/abayomi.jpg" },
+    { id: 7, name: "Eminent Alhaji Segun Fetuga", position: "Social Secretary/Event Planner",  image: "/fetuga.jpg" },
+    { id: 8, name: "HRM Oba Dr (AMB) Adetokunbo Gbadegeshin Okikiola Tejuosho. PHD, DPHIL (Dr of Philosophy) Kesari Adabonyin - Ekun 1 The Olu Kemta Orile. Abeokuta.", position: "Royal Advisor",  image: "/Tejuosho.jpg" },
+    { id: 9, name: "Alhaji Rasheed Adenusi & co. Chartered Accountant FCCA, FCA, FCTI. Member, Governor Advisory Council (GAC)", position: "Grand Patron",  image: "/Adenusi.jpg" },
+    { id: 10, name: "Otunba Barrister Olufemi Okenla. (LLP) Mountain  Solicitors UK. CEO at HDV Nig Ltd.", position: "Patron",  image: "/Okenla.jpg" },
+    { id: 11, name: "Otunba Barrister Kunle Kalejaye SAN, FcArb. Chairman Eagle FM.", position: "Patron",  image: "/Kalejaye.jpg" },
+    { id: 12, name: "Chief Mrs Bisi Osibogun. The Iyalode of ljebu Land..", position: "Matron",  image: "/Osibogun.jpg" },
+    { id: 13, name: "High Chief, Abiodun Odeyemi. The Baale of ILOGBO OLOFIN. Abeokuta.", position: "Club Governor General",  image: "/Odeyemi.jpg" },
+    { id: 14, name: "Chief Mrs Dr Atinuke Abioro. PHD, Chartered Member of the Nigeria Institute of Management (NIOM", position: "Advisor",  image: "/Abioro.jpg" },
+    { id: 15, name: "Eminent Mike Olorunwa", position: "Assistant General Secretary",  image: "/Olorunwa.jpg" },
   ]
 
   return (
