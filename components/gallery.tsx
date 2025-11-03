@@ -60,7 +60,7 @@ export default function Gallery() {
 
         {/* Gallery Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {galleryFolders.slice(0, 3).map((folder) => (
+          {galleryFolders.slice(0, 6).map((folder) => (
             <div
               key={folder.id}
               onClick={() => {
@@ -81,7 +81,7 @@ export default function Gallery() {
               </div>
             </div>
           ))}
-          {galleryFolders.slice(3).map((folder) => (
+          {galleryFolders.slice(6).map((folder) => (
             <div
               key={folder.id}
               onClick={() => {
@@ -102,16 +102,6 @@ export default function Gallery() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* See More Button */}
-        <div className="text-center mt-8">
-          <Link 
-            href="/gallery" 
-            className="inline-flex px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors duration-300 font-medium"
-          >
-            See All More
-          </Link>
         </div>
       </div>
 

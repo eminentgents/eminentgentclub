@@ -106,7 +106,7 @@ export default function Hero() {
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="space-y-3">
             <p className="text-xs md:text-sm font-semibold text-secondary uppercase tracking-widest">
-              Founded January 1st, 2020
+              Founded January 1st, 2006
             </p>
 
             <h1 className="text-3xl md:text-5xl font-bold text-white">EMINENT GENTS INTERNATIONAL CLUB</h1>

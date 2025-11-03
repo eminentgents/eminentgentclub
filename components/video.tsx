@@ -26,7 +26,7 @@ export default function Video() {
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="card-hover text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary mb-1">2020</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary mb-1">2006</div>
             <p className="text-sm text-muted-foreground">Club Founded</p>
           </div>
 

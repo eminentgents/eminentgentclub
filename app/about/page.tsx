@@ -61,7 +61,7 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
             <span className="w-2 h-2 bg-primary rounded-full"></span>
-            <span className="text-sm font-semibold text-white">Since 2020</span>
+            <span className="text-sm font-semibold text-white">Since 2006</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
             About <span className="text-primary">EGIC</span>
@@ -88,7 +88,7 @@ export default function AboutPage() {
                 </div>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    Founded on January 1st, 2020, Eminent Gents International Club stands as a non-religious, non-profit, 
+                    Founded on January 1st, 2006, Eminent Gents International Club stands as a non-religious, non-profit, 
                     and non-partisan organization dedicated to Nigeria's development through organized effort and shared vision.
                   </p>
                   <p>

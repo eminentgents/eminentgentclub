@@ -36,9 +36,6 @@ export default function Navigation() {
             <Link href="/contact" className="text-sm font-medium text-foreground hover:text-primary transition">
               Contact
             </Link>
-            <Link href="/gallery" className="text-sm font-medium text-foreground hover:text-primary transition">
-              Gallery
-            </Link>
             <Link href="/Allmembers" className="text-sm font-medium text-foreground hover:text-primary transition">
               Leadership
             </Link>
@@ -70,12 +67,6 @@ export default function Navigation() {
               className="block px-3 py-2 hover:bg-muted rounded-lg transition text-sm font-medium text-primary"
             >
               Contact
-            </Link>
-            <Link
-              href="/gallery"
-              className="block px-3 py-2 hover:bg-muted rounded-lg transition text-sm font-medium text-primary"
-            >
-              Gallery
             </Link>
             <Link
               href="/Allmembers"

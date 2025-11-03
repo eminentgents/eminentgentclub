@@ -74,7 +74,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-sm md:text-base text-foreground mb-1">Phone</h3>
-                  <p className="text-sm text-muted-foreground">+234 (0) XXX XXX XXXX</p>
+                  <p className="text-sm text-muted-foreground">+234-916-539-6659; +234-803-716-7373 (PRO)
+</p>
                 </div>
               </div>
 
@@ -84,7 +85,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-sm md:text-base text-foreground mb-1">Email</h3>
-                  <p className="text-sm text-muted-foreground">info@egic.org</p>
+                  <p className="text-sm text-muted-foreground">egic.contact@gmail.com</p>
                 </div>
               </div>
 

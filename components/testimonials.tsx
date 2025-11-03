@@ -2,14 +2,16 @@ import { Star } from "lucide-react"
 
 export default function Testimonials() {
   const testimonials = [
-    { name: "Adekunle Okafor", role: "Member", text: "EGIC has transformed my perspective on community development." },
+    { name: "Oyesanya Olatunji", 
+      role: "Member", 
+      text: "EGIC has transformed my perspective on community development." },
     {
-      name: "Oluwaseun Adeyemi",
+      name: "Jayesimi Ademuyiwa",
       role: "Member",
       text: "The networking opportunities here are invaluable for business growth.",
     },
     {
-      name: "Babatunde Ogunleye",
+      name: "Ayenogun Segun",
       role: "Member",
       text: "A platform that truly empowers and promotes knowledge sharing.",
     },
