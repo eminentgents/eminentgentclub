@@ -88,7 +88,7 @@ export default function AboutPage() {
                 </div>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    Founded on May 12th, 2006, Eminent Gents International Club stands as a non-religious, non-profit, 
+                    Founded on May 12th, 2006 by Eminent Otunba Olumide Owoseni. Eminent Gents International Club stands as a non-religious, non-profit, 
                     and non-partisan organization dedicated to Nigeria's development through organized effort and shared vision.
                   </p>
                   <p>

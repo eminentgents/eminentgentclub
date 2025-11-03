@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin } from "lucide-react"
+import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Youtube } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -79,7 +79,7 @@ export default function Footer() {
                 href="#"
                 className="w-8 h-8 bg-white/20 hover:bg-secondary rounded-full flex items-center justify-center transition"
               >
-                <Twitter size={16} />
+                <Youtube size={16} />
               </a>
               <a
                 href="#"
