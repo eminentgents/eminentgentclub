@@ -6,12 +6,23 @@ import Navigation from "@/components/navigation"
 import { useRouter } from "next/navigation"
 
 interface GalleryImage {
-  id: number
+  id: string
   src: string
+  title: string
+  description: string
+  folderTitle: string
+}
+
+interface FolderData {
+  id: number
+  title: string
+  description: string
+  folder: string
+  images: string[]
 }
 
 export default function FullGalleryPage() {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [allGalleryImages, setAllGalleryImages] = useState<GalleryImage[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -22,24 +33,29 @@ export default function FullGalleryPage() {
     const fetchGalleryImages = async () => {
       try {
         setLoading(true)
-        const response = await fetch('/api/gallery')
-        const data = await response.json()
+        const response = await fetch('/api/main-gallery')
+        const data: FolderData[] = await response.json()
         
         if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch gallery images')
+          throw new Error('Failed to fetch gallery images')
         }
 
-        if (data.images && data.images.length > 0) {
-          // Simple transformation - just IDs and src
-          const formattedImages: GalleryImage[] = data.images.map((src: string, index: number) => ({
-            id: index + 1,
-            src: src
-          }))
-          
-          setAllGalleryImages(formattedImages)
-        } else {
-          setAllGalleryImages([])
-        }
+        // Flatten all images from all folders with their metadata
+        const formattedImages: GalleryImage[] = []
+        
+        data.forEach((folder) => {
+          folder.images.forEach((imageSrc, index) => {
+            formattedImages.push({
+              id: `${folder.id}-${index}`,
+              src: imageSrc,
+              title: folder.title,
+              description: folder.description,
+              folderTitle: folder.title
+            })
+          })
+        })
+        
+        setAllGalleryImages(formattedImages)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
         console.error('Error fetching gallery images:', err)
@@ -53,13 +69,17 @@ export default function FullGalleryPage() {
 
   const handleNext = () => {
     if (selectedImage !== null) {
-      setSelectedImage((selectedImage % allGalleryImages.length) + 1)
+      const currentIndex = allGalleryImages.findIndex(img => img.id === selectedImage)
+      const nextIndex = (currentIndex + 1) % allGalleryImages.length
+      setSelectedImage(allGalleryImages[nextIndex].id)
     }
   }
 
   const handlePrev = () => {
     if (selectedImage !== null) {
-      setSelectedImage(selectedImage === 1 ? allGalleryImages.length : selectedImage - 1)
+      const currentIndex = allGalleryImages.findIndex(img => img.id === selectedImage)
+      const prevIndex = currentIndex === 0 ? allGalleryImages.length - 1 : currentIndex - 1
+      setSelectedImage(allGalleryImages[prevIndex].id)
     }
   }
 
@@ -90,6 +110,15 @@ export default function FullGalleryPage() {
       document.body.style.overflow = 'unset'
     }
   }, [selectedImage])
+
+  // Get currently selected image data
+  const currentImage = selectedImage 
+    ? allGalleryImages.find(img => img.id === selectedImage)
+    : null
+
+  const currentImageIndex = selectedImage 
+    ? allGalleryImages.findIndex(img => img.id === selectedImage) + 1
+    : 0
 
   if (loading) {
     return (
@@ -145,14 +174,19 @@ export default function FullGalleryPage() {
                 <div
                   key={image.id}
                   onClick={() => setSelectedImage(image.id)}
-                  className="group relative cursor-pointer overflow-hidden rounded-lg aspect-square"
+                  className="group relative cursor-pointer overflow-hidden rounded-lg aspect-square bg-muted"
                 >
                   <img
                     src={image.src}
-                    alt={`Gallery image ${image.id}`}
+                    alt={image.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-black/40 flex items-end">
+                    <div className="p-4 text-white w-full">
+                      <p className="text-sm font-semibold line-clamp-2">{image.title}</p>
+                    </div>
+                  </div>
+
                 </div>
               ))}
             </div>
@@ -161,7 +195,7 @@ export default function FullGalleryPage() {
       </section>
 
       {/* Full Screen Lightbox Modal */}
-      {selectedImage !== null && allGalleryImages.length > 0 && (
+      {selectedImage !== null && currentImage && (
         <div 
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
           onClick={handleBackdropClick}
@@ -193,18 +227,25 @@ export default function FullGalleryPage() {
             {/* Image Container */}
             <div className="flex-1 flex items-center justify-center overflow-hidden">
               <img
-                src={allGalleryImages[selectedImage - 1].src}
-                alt={`Gallery image ${selectedImage}`}
+                src={currentImage.src}
+                alt={currentImage.title}
                 className="w-full h-full object-contain max-w-full max-h-full"
-                onClick={() => setSelectedImage(null)}
               />
             </div>
 
-            {/* Image Counter */}
-            <div className="text-center mt-4 p-4">
-              <p className="text-white/50 text-sm">
-                {selectedImage} of {allGalleryImages.length}
-              </p>
+            {/* Image Info & Counter */}
+            <div className="bg-black/70 backdrop-blur-sm p-6 mt-4 rounded-lg">
+              <div className="max-w-4xl mx-auto">
+                <h3 className="text-white text-lg font-semibold mb-2">
+                  {currentImage.title}
+                </h3>
+                <p className="text-white/70 text-sm mb-4">
+                  {currentImage.description}
+                </p>
+                <p className="text-white/50 text-xs text-center">
+                  {currentImageIndex} of {allGalleryImages.length}
+                </p>
+              </div>
             </div>
           </div>
         </div>

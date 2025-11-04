@@ -33,11 +33,17 @@ export default function Navigation() {
             <Link href="/about" className="text-sm font-medium text-foreground hover:text-primary transition">
               About
             </Link>
-            <Link href="/contact" className="text-sm font-medium text-foreground hover:text-primary transition">
-              Contact
-            </Link>
             <Link href="/Allmembers" className="text-sm font-medium text-foreground hover:text-primary transition">
               Leadership
+            </Link>
+            <Link href="/events" className="text-sm font-medium text-foreground hover:text-primary transition">
+              Events and News
+            </Link>
+            <Link href="/gallery" className="text-sm font-medium text-foreground hover:text-primary transition">
+              Gallery
+            </Link>
+            <Link href="/contact" className="text-sm font-medium text-foreground hover:text-primary transition">
+              Contact Us
             </Link>
           </div>
 
@@ -63,16 +69,28 @@ export default function Navigation() {
               About
             </Link>
             <Link
-              href="/contact"
-              className="block px-3 py-2 hover:bg-muted rounded-lg transition text-sm font-medium text-primary"
-            >
-              Contact
-            </Link>
-            <Link
               href="/Allmembers"
               className="block px-3 py-2 hover:bg-muted rounded-lg transition text-sm font-medium text-primary"
             >
               Leadership
+            </Link>
+            <Link
+              href="/events"
+              className="block px-3 py-2 hover:bg-muted rounded-lg transition text-sm font-medium text-primary"
+            >
+              Events and News
+            </Link>
+            <Link
+              href="/gallery"
+              className="block px-3 py-2 hover:bg-muted rounded-lg transition text-sm font-medium text-primary"
+            >
+              Gallery
+            </Link>
+            <Link
+              href="/contact"
+              className="block px-3 py-2 hover:bg-muted rounded-lg transition text-sm font-medium text-primary"
+            >
+              Contact
             </Link>
           </div>
         )}

@@ -20,7 +20,7 @@ export default function AllMembers() {
     { id: 11, name: "Otunba Barrister Kunle Kalejaye SAN, FcArb. Chairman Eagle FM.", position: "Special Advisor",  image: "/Kalejaye.jpg" },
     { id: 12, name: "Chief Mrs Bisi Osibogun. The Iyalode of ljebu Land..", position: "Matron",  image: "/Osibogun.jpg" },
     { id: 13, name: "High Chief, Abiodun Odeyemi. The Baale of ILOGBO OLOFIN. Abeokuta.", position: "Club Governor General",  image: "/Odeyemi.jpg" },
-    { id: 14, name: "Chief Mrs Dr Atinuke Abioro. PHD, Chartered Member of the Nigeria Institute of Management (NIOM", position: "Advisor",  image: "/Abioro.jpg" },
+    { id: 14, name: "Chief Mrs Dr Atinuke Abioro. PHD, Chartered Member of the Nigeria Institute of Management (NIOM)", position: "Advisor",  image: "/Abioro.jpg" },
     { id: 15, name: "Eminent Barrister Mike Olorunwa", position: "Assistant General Secretary",  image: "/Olorunwa.jpg" },
     { id: 16, name: "Eminent Moshood Adebisi Yusuf. Works at, Chairman, Demolish Venture LTD Importer and Exporter of Household Goods", position: "Member",  image: "/Yusuf.jpg" },
     { id: 17, name: "Eminent  Ariyo Abass Olalekan. CEO Aribass Global Logistics Freight Forwarder & Maritime", position: "Member",  image: "/Olalekan.jpg" },
