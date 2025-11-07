@@ -6,6 +6,7 @@ import Video from "@/components/video"
 import Members from "@/components/members"
 import Stats from "@/components/stats"
 import Events from "@/components/events"
+import DonationSection from "@/components/donation-section"
 import Testimonials from "@/components/testimonials"
 import Footer from "@/components/footer"
 
@@ -21,6 +22,7 @@ export default function Home() {
       <Events />
       <Members />
       <Testimonials />
+      <DonationSection />
       <Footer />
     </main>
   )
