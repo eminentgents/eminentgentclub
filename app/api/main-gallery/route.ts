@@ -13,7 +13,7 @@ export async function GET() {
       },
       { 
         id: 2, 
-        title: "ANNUAL PROJECT (Year 2021): Health Outreach", 
+        title: "ANNUAL PROJECT (Year 2020): Health Outreach", 
         description: "Medical Bill Payment Support for In-Patients (Ijebu-Ode State Hospital)",
         folder: "health-outreach"
       },

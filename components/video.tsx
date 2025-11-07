@@ -9,7 +9,7 @@ export default function Video() {
       title: "EGIC Inaugural Event",
       description: "Main ceremony highlights"
     },
-    // Add more videos here  https://youtu.be/7cg8XDhsmjw?si=bx8YDBfLPCPHcfN8
+    // Add more videos here  https://youtu.be/ICqQvn-q7Fk?si=hrFSd6aKs3orQizG
     {
       id: "SOo9gpddOII",
       title: "Club event",
@@ -19,6 +19,11 @@ export default function Video() {
       id: "7cg8XDhsmjw",
       title: "ANNUAL PROJECT (Year 2024): Health Outreach",
       description: "Medical Bill Payment Support for In-Patients (Ring Road State Hospital, Ibadan, Oyo State)"
+    },
+    {
+      id: "ICqQvn-q7Fk",
+      title: "ANNUAL PROJECT (Year 2020): Health Outreach",
+      description: "Medical Bill Payment Support for In-Patients (Ijebu-Ode General Hospital, Ogun State)"
     },
   ]
 
