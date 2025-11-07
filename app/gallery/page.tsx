@@ -3,17 +3,24 @@
 import { useState, useEffect } from "react"
 import { X, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react"
 import Navigation from "@/components/navigation"
-import { useRouter } from "next/navigation"
 
-interface GalleryImage {
-  id: string
-  src: string
-  title: string
-  description: string
-  folderTitle: string
-}
+// interface GalleryImage {
+//   id: string
+//   src: string
+//   title: string
+//   description: string
+//   folderTitle: string
+// }
 
-interface FolderData {
+// interface FolderData {
+//   id: number
+//   title: string
+//   description: string
+//   folder: string
+//   images: string[]
+// }
+
+interface GalleryFolder {
   id: number
   title: string
   description: string
@@ -22,234 +29,152 @@ interface FolderData {
 }
 
 export default function FullGalleryPage() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [allGalleryImages, setAllGalleryImages] = useState<GalleryImage[]>([])
+  const [selectedFolder, setSelectedFolder] = useState<number | null>(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0)
+  const [galleryFolders, setGalleryFolders] = useState<GalleryFolder[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const router = useRouter()
 
-  // Fetch images from API
   useEffect(() => {
-    const fetchGalleryImages = async () => {
+    const fetchGalleryData = async () => {
       try {
-        setLoading(true)
         const response = await fetch('/api/main-gallery')
-        const data: FolderData[] = await response.json()
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch gallery images')
-        }
-
-        // Flatten all images from all folders with their metadata
-        const formattedImages: GalleryImage[] = []
-        
-        data.forEach((folder) => {
-          folder.images.forEach((imageSrc, index) => {
-            formattedImages.push({
-              id: `${folder.id}-${index}`,
-              src: imageSrc,
-              title: folder.title,
-              description: folder.description,
-              folderTitle: folder.title
-            })
-          })
-        })
-        
-        setAllGalleryImages(formattedImages)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
-        console.error('Error fetching gallery images:', err)
+        const data = await response.json()
+        setGalleryFolders(data)
+      } catch (error) {
+        console.error('Error fetching gallery data:', error)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchGalleryImages()
+    fetchGalleryData()
   }, [])
-
-  const handleNext = () => {
-    if (selectedImage !== null) {
-      const currentIndex = allGalleryImages.findIndex(img => img.id === selectedImage)
-      const nextIndex = (currentIndex + 1) % allGalleryImages.length
-      setSelectedImage(allGalleryImages[nextIndex].id)
-    }
-  }
-
-  const handlePrev = () => {
-    if (selectedImage !== null) {
-      const currentIndex = allGalleryImages.findIndex(img => img.id === selectedImage)
-      const prevIndex = currentIndex === 0 ? allGalleryImages.length - 1 : currentIndex - 1
-      setSelectedImage(allGalleryImages[prevIndex].id)
-    }
-  }
-
-  // Close modal when clicking on the backdrop (dark area)
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      setSelectedImage(null)
-    }
-  }
-
-  // Close modal when pressing Escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSelectedImage(null)
-      }
-    }
-
-    if (selectedImage !== null) {
-      document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
-  }, [selectedImage])
-
-  // Get currently selected image data
-  const currentImage = selectedImage 
-    ? allGalleryImages.find(img => img.id === selectedImage)
-    : null
-
-  const currentImageIndex = selectedImage 
-    ? allGalleryImages.findIndex(img => img.id === selectedImage) + 1
-    : 0
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-card">
-        <Navigation />
-        <div className="flex justify-center items-center py-32">
-          <div className="text-lg text-muted-foreground">Loading gallery images...</div>
+      <section className="py-16 md:py-24 bg-card">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p>Loading gallery...</p>
+          </div>
         </div>
-      </div>
+      </section>
     )
   }
 
-  if (error) {
-    return (
-      <div className="min-h-screen bg-card">
-        <Navigation />
-        <div className="flex justify-center items-center py-32">
-          <div className="text-lg text-red-600">Error: {error}</div>
-        </div>
-      </div>
-    )
+  const getSelectedFolder = () => {
+    return galleryFolders.find(folder => folder.id === selectedFolder)
   }
 
   return (
     <div className="min-h-screen bg-card">
       <Navigation />
       
-      <section className="py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Back Button */}
-          <button
-            onClick={() => router.back()}
-            className="flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-300 mb-8"
-          >
-            <ArrowLeft size={20} />
-            <span>Back</span>
-          </button>
-
+      <section className="py-16 md:py-24 bg-card">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Full Gallery</h1>
-            <p className="text-md text-muted-foreground">
-              {allGalleryImages.length} moments from our events
-            </p>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Gallery</h2>
+            <p className="text-sm md:text-base text-muted-foreground">Moments from our events</p>
           </div>
 
-          {allGalleryImages.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-muted-foreground">No images found in the gallery</p>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {allGalleryImages.map((image) => (
-                <div
-                  key={image.id}
-                  onClick={() => setSelectedImage(image.id)}
-                  className="group relative cursor-pointer overflow-hidden rounded-lg aspect-square bg-muted"
-                >
-                  <img
-                    src={image.src}
-                    alt={image.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/40 flex items-end">
-                    <div className="p-4 text-white w-full">
-                      <p className="text-sm font-semibold line-clamp-2">{image.title}</p>
-                    </div>
-                  </div>
-
+          {/* Gallery Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {galleryFolders.slice(0, 6).map((folder) => (
+              <div
+                key={folder.id}
+                onClick={() => {
+                  setSelectedFolder(folder.id)
+                  setCurrentImageIndex(0)
+                }}
+                className="group relative cursor-pointer overflow-hidden rounded-lg aspect-square"
+              >
+                <img
+                  src={folder.images[0] || '/placeholder.jpg'}
+                  alt={folder.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300 flex flex-col justify-end p-4">
+                  <h3 className="text-white font-semibold text-sm">{folder.title}</h3>
+                  <p className="text-white/80 text-xs">{folder.description}</p>
+                  <p className="text-white/60 text-xs mt-1">{folder.images.length} photos</p>
                 </div>
-              ))}
-            </div>
-          )}
+              </div>
+            ))}
+            {galleryFolders.slice(6).map((folder) => (
+              <div
+                key={folder.id}
+                onClick={() => {
+                  setSelectedFolder(folder.id)
+                  setCurrentImageIndex(0)
+                }}
+                className="group relative cursor-pointer overflow-hidden rounded-lg aspect-square hidden md:block"
+              >
+                <img
+                  src={folder.images[0] || '/placeholder.jpg'}
+                  alt={folder.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300 flex flex-col justify-end p-4">
+                  <h3 className="text-white font-semibold text-sm">{folder.title}</h3>
+                  <p className="text-white/80 text-xs">{folder.description}</p>
+                  <p className="text-white/60 text-xs mt-1">{folder.images.length} photos</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </section>
 
-      {/* Full Screen Lightbox Modal */}
-      {selectedImage !== null && currentImage && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-          onClick={handleBackdropClick}
-        >
-          <div className="relative w-full h-full max-w-7xl max-h-[90vh] flex flex-col">
-            {/* Close Button - Top Right */}
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-10 text-white hover:text-secondary transition p-2 bg-black/50 rounded-full"
-            >
-              <X size={28} />
-            </button>
+        {/* Fullscreen Modal */}
+        {selectedFolder !== null && (
+          <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
+            <div className="relative max-w-3xl w-full">
+              <button
+                onClick={() => {
+                  setSelectedFolder(null)
+                  setCurrentImageIndex(0)
+                }}
+                className="absolute -top-10 right-0 text-white hover:text-secondary transition z-10"
+              >
+                <X size={28} />
+              </button>
 
-            {/* Navigation Buttons */}
-            <button
-              onClick={handlePrev}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition"
-            >
-              <ChevronLeft size={24} />
-            </button>
+              <div className="relative aspect-square rounded-lg overflow-hidden bg-black">
+                <img
+                  src={getSelectedFolder()?.images[currentImageIndex] || '/placeholder.jpg'}
+                  alt={`${getSelectedFolder()?.title} - Image ${currentImageIndex + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-            <button
-              onClick={handleNext}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition"
-            >
-              <ChevronRight size={24} />
-            </button>
+              <button
+                onClick={() => setCurrentImageIndex((prev) => 
+                  prev === 0 ? (getSelectedFolder()?.images.length || 1) - 1 : prev - 1
+                )}
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition"
+              >
+                <ChevronLeft size={20} />
+              </button>
 
-            {/* Image Container */}
-            <div className="flex-1 flex items-center justify-center overflow-hidden">
-              <img
-                src={currentImage.src}
-                alt={currentImage.title}
-                className="w-full h-full object-contain max-w-full max-h-full"
-              />
-            </div>
+              <button
+                onClick={() => setCurrentImageIndex((prev) => 
+                  prev === (getSelectedFolder()?.images.length || 1) - 1 ? 0 : prev + 1
+                )}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition"
+              >
+                <ChevronRight size={20} />
+              </button>
 
-            {/* Image Info & Counter */}
-            <div className="bg-black/70 backdrop-blur-sm p-6 mt-4 rounded-lg">
-              <div className="max-w-4xl mx-auto">
-                <h3 className="text-white text-lg font-semibold mb-2">
-                  {currentImage.title}
-                </h3>
-                <p className="text-white/70 text-sm mb-4">
-                  {currentImage.description}
-                </p>
-                <p className="text-white/50 text-xs text-center">
-                  {currentImageIndex} of {allGalleryImages.length}
+              <div className="text-center mt-4">
+                <h3 className="text-white text-base font-bold">{getSelectedFolder()?.title}</h3>
+                <p className="text-white/70 text-sm mt-1">{getSelectedFolder()?.description}</p>
+                <p className="text-white/60 text-xs mt-2">
+                  {currentImageIndex + 1} of {getSelectedFolder()?.images.length}
                 </p>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </section>
     </div>
   )
 }

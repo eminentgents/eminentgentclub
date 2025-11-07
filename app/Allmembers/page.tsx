@@ -8,7 +8,7 @@ import Footer from "@/components/footer"
 export default function AllMembers() {
   const members = [
     { id: 1, name: "Eminent Otunba Olumide Owoseni Fca. Work at Chairman/ CEO Lumie. Group of Companies.", position: "President", bio: "Visionary leader dedicated to the growth and development of EGIC", image: "/owoseni.jpg" },
-    { id: 2, name: "Eminent Aare (Engr) Ajibola Fagade CEO of JFA Nig.Ltd", position: "Vice President", bio: "Engineering expert with years of leadership experience", image: "/fagade.jpg" },
+    { id: 2, name: "Eminent Aare (Engr) Ajibola Fagade CEO of JFA Nig.Ltd", position: "Vice President", bio: "Engineering expert with years of leadership experience", image: "/fagade.jpg" },
     { id: 3, name: "Eminent (Prince) ADEDEJI Babatunde Abiodun", position: "General Secretary", bio: "Academic leader committed to organizational excellence", image: "/abiodun.jpg" },
     { id: 4, name: "Eminent ABDUL Olatunji Segunmaru", position: "Treasurer", image: "/segunmaru.jpg" },
     { id: 5, name: "Eminent AKINSANYA Olaseni", position: "Financial Secretary",  image: "/olaseni.jpg" },
@@ -28,6 +28,46 @@ export default function AllMembers() {
     { id: 19, name: "Eminent Oyesanya Olatunji. Work at MD, Corner Breeks Building Company Nig, Limited.", position: "Member",  image: "/Olatunji.jpg" },
     { id: 20, name: "Eminent Jayesimi Ademuyiwa. Work at The MD Jayetech Level Plus Limited.", position: "Member",  image: "/Ademuyiwa.jpg" },
     { id: 21, name: "Eminent Ayenogun Segun. Work at Bureau of Local Government Pensions, Office of the Executive Governor,  Oke-Mosan, Abeokuta, Ogun State", position: "Member",  image: "/Segun.jpg" },
+  ]
+
+  const allMembersList = [
+    "Eminent Otunba Olumide Owoseni",
+    "Eminent Alhaji Aare Ajibola Fagade",
+    "Eminent (Prince) Abiodun Adedeji",
+    "Eminent Abdullah Olatunji",
+    "Eminent Barrister Abayomi Akodu",
+    "Eminent Barrister Mike Olorunwa",
+    "Eminent Olaseni Akinsanya",
+    "Eminent Alhaji Segun Fetuga",
+    "Eminent Hon Dare Alebiosu",
+    "Eminent Abiodun Banjoko",
+    "Eminent Ade Osibote",
+    "Eminent Otunba Ola Agboola",
+    "Eminent Olufunso Oyetesu",
+    "Eminent Ariyo Olamilekan Abass",
+    "Eminent Segun Ayenogun",
+    "Eminent Ayodele Omotosho",
+    "Eminent Bisi Yusuf",
+    "Eminent Tunji Oyesanya",
+    "Eminent Femi Adekoya",
+    "Eminent Femi Akoje",
+    "Eminent Kingsly Arase",
+    "Eminent Lateef Omotayo",
+    "Eminent Adewale Makanjuola",
+    "Eminent Muyiwa Jayesimi",
+    "Eminent Olajuwon Ismail",
+    "Eminent Otunba Akinwolemiwa Awobodu",
+    "Eminent Prince Omololu Ajayi",
+    "Eminent Prince Tayo Okubadejo",
+    "Eminent Hon Supo Anifata",
+    "Eminent Segun Adekoya",
+    "Eminent Segun Oseni",
+    "Eminent Barrister Oluwaseun Basorun",
+    "Eminent Sodiq Fatai",
+    "Eminent Barrister Taiwo Odumosu",
+    "Eminent Hon Tayo Alawiye",
+    "Eminent Tunde Ayodele",
+    "Eminent Abayomi Abudu",
   ]
 
   return (
@@ -71,6 +111,42 @@ export default function AllMembers() {
                     </div>
                 </div>
             ))}
+          </div>
+
+          {/* Complete Members List */}
+          <div className="mt-20 bg-card border border-border rounded-lg p-8 md:p-12">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+                Complete Members Registry
+              </h2>
+              <p className="text-muted-foreground text-sm md:text-base">
+                Eminent Gents International Club Members as of 30th October 2025
+              </p>
+              <div className="w-20 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-x-8 gap-y-4 max-w-4xl mx-auto">
+              {allMembersList.map((member, index) => (
+                <div 
+                  key={index}
+                  className="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/5 transition-colors duration-200"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="text-sm font-semibold text-primary">
+                      {(index + 1).toString().padStart(2, '0')}
+                    </span>
+                  </div>
+                  <p className="text-foreground pt-1 flex-1">{member}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full">
+                <span className="text-2xl font-bold text-primary">{allMembersList.length}</span>
+                <span className="text-muted-foreground">Total Members</span>
+              </div>
+            </div>
           </div>
 
           {/* Call to Action */}
