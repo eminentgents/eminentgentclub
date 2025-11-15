@@ -31,15 +31,27 @@ export async function GET() {
       },
       { 
         id: 5, 
+        title: "Year 2025/2027 Executive Council Inauguration and Meeting", 
+        description: "",
+        folder: "executive-council"
+      },
+      { 
+        id: 6, 
         title: "CLUB EVENT", 
         description: "Visitation to our Patron, Barrister Olufemi Okenla",
         folder: "club-event"
       },
       { 
-        id: 6, 
+        id: 7, 
         title: "CLUB EVENT", 
         description: "Visitation to our Grand Patron, Alhaji Rasheed Adenus",
         folder: "club-event2"
+      },
+      { 
+        id: 8, 
+        title: "CLUB EVENT", 
+        description: "",
+        folder: "club-event3"
       },
     ]
 

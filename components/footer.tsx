@@ -70,19 +70,19 @@ export default function Footer() {
             <h3 className="text-sm font-bold mb-4">Follow Us</h3>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/share/g/17MoQqSaiz/?mibextid=wwXIfr"
                 className="w-8 h-8 bg-white/20 hover:bg-secondary rounded-full flex items-center justify-center transition"
               >
                 <Facebook size={16} />
               </a>
               <a
-                href="#"
+                href="https://youtube.com/@eminentgentsinternationalclub?si=snRLHozy4HbkHPC_"
                 className="w-8 h-8 bg-white/20 hover:bg-secondary rounded-full flex items-center justify-center transition"
               >
                 <Youtube size={16} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/eminentgentsintclub?igsh=MWphcXBxamt5dHF2cw=="
                 className="w-8 h-8 bg-white/20 hover:bg-secondary rounded-full flex items-center justify-center transition"
               >
                 <Instagram size={16} />
