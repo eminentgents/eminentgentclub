@@ -169,4 +169,5 @@ export default function AllMembers() {
       <Footer />
     </>
   )
+
 }
